@@ -45,7 +45,7 @@ services:
       - "ELASTICSEARCH_PASSWORD=${ES_PASSWORD}"
       - server.port=127.0.0.1:5601
       - elasticsearch.url="http://elasticsearch:9200"
-      - server.name="kpistreaming-kibana"
+      - server.name="kibana"
     ports:
       - '5601:5601'
     # Health check to confirm availability of Kibana
@@ -90,5 +90,6 @@ networks:
       ipam:
         driver: default
         config:
-        # default docker compose subnet(172.177.0.0/16) gives Amazon quarantine issue
+        # default docker compose subnet(172.177.0.0/16), which may overlap with existing services on home network.
+        # use this configuration to update to a different subnet
         - subnet: 192.168.1.0/24
